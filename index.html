@@ -65,6 +65,16 @@
       }
     }
 
+    .icon-orange {
+      text-align: center;
+    }
+
+    .icon-orange img {
+      max-width: 100%;
+      height: auto;
+      max-height: 131px;
+    }
+
     .main-message {
       font-size: 1.9rem;
       font-weight: 700;
@@ -260,7 +270,7 @@
   <div class="card">
     <div class="icon-orange">
         <picture>
-            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/282800/f05202e348f2962f82673c6cef0acd8b5b704026/capsule_231x87_2x.jpg" style="height: 131px;" alt="百分百鲜橙汁横幅">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/282800/f05202e348f2962f82673c6cef0acd8b5b704026/capsule_231x87_2x.jpg" alt="百分百鲜橙汁横幅">
         </picture>
     </div>
 
@@ -279,7 +289,7 @@
     </div>
 
     <div class="sub-text">
-      <span>🔄 如果浏览器未自动跳转，可以</span>
+      <span id="retryHint">🔄 如果浏览器未自动跳转，可以</span>
       <button id="retryButton" class="retry-link" type="button">点击这里重试</button>
     </div>
 
@@ -340,6 +350,16 @@
         }
       }
 
+        function updateRetryHint() {
+        const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent);
+        const hintSpan = document.getElementById('retryHint');
+        const retryBtn = document.getElementById('retryButton');
+        if (isMobile && hintSpan && retryBtn) {
+            hintSpan.textContent = '⚠ 该游戏为PC游戏，似乎不支持您的设备';
+            retryBtn.textContent = '仍要尝试';
+        }
+        }
+
       function setupRetryButton() {
         const retryBtn = document.getElementById('retryButton');
         if (retryBtn) {
@@ -351,6 +371,7 @@
       }
 
       window.addEventListener('DOMContentLoaded', function() {
+        updateRetryHint();
         setupRetryButton();
       });
 
