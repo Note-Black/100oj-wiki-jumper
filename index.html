@@ -321,13 +321,8 @@
 
       function retryLaunch() {
         try {
-          const newWindow = window.open(STEAM_RUN_URL, '_blank');
-          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-            window.location.href = STEAM_RUN_URL;
-          } else {
-            newWindow.focus();
-          }
-          
+          window.location.href = STEAM_RUN_URL;
+
           const retryBtn = document.getElementById('retryButton');
           if (retryBtn) {
             const originalText = retryBtn.textContent;
